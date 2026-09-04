@@ -284,12 +284,7 @@ h2{ font-family:var(--font-display); font-size:clamp(1.7rem, 3.6vw, 2.6rem); lin
   grid-template-columns:1fr;
 }
 @media (min-width:720px){
-  .help-grid{ grid-template-columns:repeat(6, 1fr); }
-  .help-card:nth-child(1){ grid-column:span 2; }
-  .help-card:nth-child(2){ grid-column:span 2; }
-  .help-card:nth-child(3){ grid-column:span 2; }
-  .help-card:nth-child(4){ grid-column:span 3; }
-  .help-card:nth-child(5){ grid-column:span 3; }
+  .help-grid{ grid-template-columns:repeat(3, 1fr); }
 }
 .help-card{
   background:var(--color-bg-soft);
@@ -398,10 +393,11 @@ h2{ font-family:var(--font-display); font-size:clamp(1.7rem, 3.6vw, 2.6rem); lin
 }
 .asado::before{
   content:""; position:absolute; inset:0; z-index:1;
-  background:linear-gradient(180deg, rgba(11,11,11,.55) 0%, rgba(11,11,11,.85) 75%);
+  background:linear-gradient(100deg, rgba(11,11,11,.92) 0%, rgba(11,11,11,.78) 42%, rgba(11,11,11,.4) 75%);
 }
 .asado-content{ position:relative; z-index:2; max-width:640px; }
-.asado h2{ color:var(--color-white); }
+.asado h2{ color:var(--color-white); text-shadow:0 2px 12px rgba(0,0,0,.4); }
+.asado-lede{ color:#e4e3de !important; text-shadow:0 1px 8px rgba(0,0,0,.5); }
 
 /* ---------- manifesto ---------- */
 .manifesto{ text-align:center; }
@@ -594,16 +590,6 @@ h2{ font-family:var(--font-display); font-size:clamp(1.7rem, 3.6vw, 2.6rem); lin
           <p>Te ayudamos a calcular cuánto llevar según la cantidad de comensales.</p>
         </div>
         <div class="help-card reveal" style="--i:4">
-          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
-          <h3>Cómo lo vas a cocinar</h3>
-          <p>Parrilla, horno, plancha o guiso, cada preparación pide un corte distinto.</p>
-        </div>
-        <div class="help-card reveal" style="--i:5">
-          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg></div>
-          <h3>Tierno, rendidor o rápido</h3>
-          <p>Buscamos junto a vos la textura y el rinde que necesitás para esa comida.</p>
-        </div>
-        <div class="help-card reveal" style="--i:6">
           <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
           <h3>Promos del día</h3>
           <p>Te avisamos si hay una oferta que se ajusta mejor a lo que estás por llevar.</p>
@@ -688,7 +674,7 @@ h2{ font-family:var(--font-display); font-size:clamp(1.7rem, 3.6vw, 2.6rem); lin
     <div class="asado-bg" id="asadoBg"></div>
     <div class="container asado-content">
       <h2 class="reveal">Un buen asado no tiene por qué salir una fortuna.</h2>
-      <p class="lede reveal" style="--i:1; color:var(--color-text-muted)">Contanos cuántos son, cuánto querés gastar y qué les gusta. Combinamos distintos cortes para lograr cantidad, variedad y buen precio.</p>
+      <p class="lede reveal asado-lede" style="--i:1">Contanos cuántos son, cuánto querés gastar y qué les gusta. Combinamos distintos cortes para lograr cantidad, variedad y buen precio.</p>
       <div class="reveal" style="--i:2; margin-top:2rem">
         <a class="btn" href="https://wa.me/5491146874050?text=Hola!%20Quiero%20armar%20un%20asado" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.28-.14-1.64-.81-1.9-.9-.25-.1-.44-.14-.62.14-.18.28-.72.9-.88 1.08-.16.18-.32.2-.6.07-.28-.14-1.17-.43-2.23-1.38-.82-.73-1.38-1.64-1.54-1.92-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.48.14-.16.18-.28.28-.46.09-.18.05-.34-.02-.48-.07-.14-.62-1.5-.85-2.05-.22-.53-.45-.46-.62-.47-.16-.01-.34-.01-.53-.01-.18 0-.48.07-.73.34-.25.28-.96.94-.96 2.28 0 1.34.98 2.64 1.12 2.82.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.25.18 1.72.11.53-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33z"/><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.08L2 22l5.06-1.33A9.94 9.94 0 0 0 12.02 22C17.55 22 22 17.52 22 12S17.55 2 12.02 2zm0 18.15a8.1 8.1 0 0 1-4.14-1.13l-.3-.18-3 .79.8-2.92-.2-.3A8.14 8.14 0 1 1 20.16 12a8.15 8.15 0 0 1-8.14 8.15z"/></svg>
