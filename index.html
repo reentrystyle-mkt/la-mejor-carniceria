@@ -3,60 +3,898 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nombre del cliente</title>
+<title>La Mejor Carnicería — Rodó 6499, Mataderos</title>
+<meta name="description" content="Carnicería de barrio en Mataderos. Te ayudamos a elegir el corte justo según qué vas a cocinar, para cuántos y cuánto querés gastar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap');
 
 :root{
-  --color-bg: #0a0a0a;
-  --color-surface: #131313;
-  --color-accent: #ffffff;
-  --color-text: #f2f2f2;
-  --color-text-muted: #8a8a8a;
-  --color-border: #222222;
-  --font-body: 'Inter', sans-serif;
+  --color-bg: #0b0b0b;
+  --color-bg-soft: #141414;
+  --color-paper: #f5f4f0;
+  --color-ink: #0b0b0b;
+  --color-white: #ffffff;
+  --color-green: #2c9144;
+  --color-green-dark: #1f6b32;
+  --color-red: #961212;
+  --color-text-muted: #9a9a94;
+  --color-border: #24241f;
+  --font-display: 'Alfa Slab One', serif;
+  --font-body: 'Montserrat', sans-serif;
+  --radius: 18px;
+  --container: 1240px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 *{ margin:0; padding:0; box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
 body{
-  background:var(--color-bg);
-  color:var(--color-text);
+  background:var(--color-paper);
+  color:var(--color-ink);
   font-family:var(--font-body);
-  line-height:1.6;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
-.container{ max-width:1100px; margin:0 auto; padding:0 1.5rem; }
-.reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+img{ display:block; max-width:100%; }
+a{ color:inherit; text-decoration:none; }
+button{ font:inherit; cursor:pointer; }
+svg{ display:block; }
+.container{ max-width:var(--container); margin:0 auto; padding:0 1.5rem; }
+
+@media (min-width:900px){ .container{ padding:0 2.5rem; } }
+
+/* ---------- reveal utility ---------- */
+.reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s var(--ease), transform .8s var(--ease); transition-delay:calc(var(--i, 0) * 90ms); }
 .reveal.is-visible{ opacity:1; transform:translateY(0); }
+.reveal-scale{ opacity:0; transform:scale(.94); transition:opacity .9s var(--ease), transform .9s var(--ease); transition-delay:calc(var(--i, 0) * 90ms); }
+.reveal-scale.is-visible{ opacity:1; transform:scale(1); }
 
 @media (prefers-reduced-motion: reduce){
-  *{ animation-duration:.01ms !important; transition-duration:.01ms !important; }
-  .reveal{ opacity:1; transform:none; }
+  *{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important; }
+  .reveal, .reveal-scale{ opacity:1; transform:none; }
 }
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; gap:.55rem;
+  padding:.95rem 1.6rem;
+  background:var(--color-green);
+  color:var(--color-white);
+  font-weight:700; font-size:.95rem;
+  border-radius:999px;
+  border:2px solid var(--color-green);
+  white-space:nowrap;
+  transition:transform .25s var(--ease), background .25s var(--ease), box-shadow .25s var(--ease);
+  box-shadow:0 10px 24px -10px rgba(44,145,68,.55);
+}
+.btn:hover{ background:var(--color-green-dark); border-color:var(--color-green-dark); transform:translateY(-2px); }
+.btn:active{ transform:translateY(0) scale(.98); }
+.btn svg{ width:18px; height:18px; }
+.btn-outline{
+  background:transparent; color:var(--color-white); border:2px solid rgba(255,255,255,.35);
+  box-shadow:none;
+}
+.btn-outline:hover{ background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.6); }
+.btn-dark{
+  background:var(--color-ink); border-color:var(--color-ink); color:var(--color-white);
+  box-shadow:0 10px 24px -10px rgba(0,0,0,.5);
+}
+.btn-dark:hover{ background:#000; border-color:#000; }
+
+/* ---------- header ---------- */
+.site-header{
+  position:fixed; inset:0 0 auto 0; z-index:90;
+  padding:.9rem 0;
+  transition:background .35s var(--ease), box-shadow .35s var(--ease), padding .35s var(--ease), backdrop-filter .35s var(--ease);
+}
+.site-header .container{ display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+.site-header.is-scrolled{
+  background:rgba(11,11,11,.86);
+  backdrop-filter:blur(14px) saturate(140%);
+  -webkit-backdrop-filter:blur(14px) saturate(140%);
+  box-shadow:0 8px 30px -18px rgba(0,0,0,.7);
+  padding:.6rem 0;
+}
+.brand{ display:flex; align-items:center; gap:.65rem; }
+.brand img{ width:38px; height:38px; filter:invert(1); }
+.brand-word{ font-family:var(--font-display); font-size:1.05rem; line-height:1; color:var(--color-white); letter-spacing:.01em; }
+.brand-word span{ display:block; font-family:var(--font-body); font-weight:600; font-size:.55rem; letter-spacing:.14em; color:var(--color-green); text-transform:uppercase; margin-top:.2rem; }
+
+.main-nav{ display:none; align-items:center; gap:1.9rem; }
+.main-nav a{ color:var(--color-white); font-size:.88rem; font-weight:600; opacity:.82; transition:opacity .2s; position:relative; }
+.main-nav a:hover{ opacity:1; }
+.main-nav a::after{ content:""; position:absolute; left:0; right:0; bottom:-6px; height:2px; background:var(--color-green); transform:scaleX(0); transform-origin:left; transition:transform .3s var(--ease); }
+.main-nav a:hover::after{ transform:scaleX(1); }
+
+.header-cta{ display:none; }
+.header-actions{ display:flex; align-items:center; gap:.75rem; }
+
+.menu-btn{ display:flex; background:none; border:none; color:var(--color-white); padding:.4rem; }
+.menu-btn svg{ width:26px; height:26px; }
+
+@media (min-width:900px){
+  .main-nav{ display:flex; }
+  .header-cta{ display:inline-flex; }
+  .menu-btn{ display:none; }
+}
+
+/* mobile drawer */
+.mobile-drawer{
+  position:fixed; inset:0; z-index:120;
+  background:var(--color-ink);
+  display:flex; flex-direction:column;
+  padding:1.5rem;
+  transform:translateY(-100%);
+  transition:transform .45s var(--ease);
+}
+.mobile-drawer.is-open{ transform:translateY(0); }
+.mobile-drawer .drawer-top{ display:flex; justify-content:space-between; align-items:center; }
+.mobile-drawer .drawer-top button{ background:none; border:none; color:var(--color-white); }
+.mobile-drawer .drawer-top svg{ width:26px; height:26px; }
+.mobile-drawer nav{ display:flex; flex-direction:column; gap:1.6rem; margin-top:3rem; }
+.mobile-drawer nav a{ color:var(--color-white); font-family:var(--font-display); font-size:1.7rem; }
+.mobile-drawer .btn{ margin-top:2.5rem; align-self:flex-start; }
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;
+  min-height:100dvh;
+  display:flex; align-items:center;
+  background:var(--color-ink);
+  padding-top:6rem;
+  overflow:hidden;
+}
+.hero::before{
+  content:""; position:absolute; inset:0;
+  background:
+    repeating-linear-gradient(135deg, rgba(44,145,68,.10) 0 2px, transparent 2px 42px);
+  pointer-events:none;
+}
+.hero-grid{
+  position:relative; z-index:1;
+  display:grid; gap:2.8rem;
+  grid-template-columns:1fr;
+  align-items:center;
+  width:100%;
+}
+@media (min-width:960px){
+  .hero-grid{ grid-template-columns:1.05fr .95fr; gap:3.5rem; }
+}
+.hero-badge{
+  display:inline-flex; align-items:center; gap:.5rem;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.14);
+  padding:.5rem 1rem;
+  border-radius:999px;
+  font-size:.78rem; font-weight:600; color:var(--color-white);
+  margin-bottom:1.6rem;
+}
+.hero-badge svg{ width:15px; height:15px; color:var(--color-green); }
+.hero h1{
+  font-family:var(--font-display);
+  color:var(--color-white);
+  font-size:clamp(1.9rem, 3.4vw, 2.65rem);
+  line-height:1.16;
+  max-width:19ch;
+}
+.hero h1 em{ font-style:normal; color:var(--color-green); }
+.hero p{
+  margin-top:1.4rem;
+  color:var(--color-text-muted);
+  font-size:1.05rem;
+  max-width:42ch;
+}
+.hero-ctas{ display:flex; flex-wrap:wrap; gap:.9rem; margin-top:2.1rem; }
+.hero-stat{
+  margin-top:2.6rem;
+  display:flex; align-items:center; gap:1rem;
+}
+.hero-stat .num{ font-family:var(--font-display); font-size:2.2rem; color:var(--color-white); }
+.hero-stat .label{ font-size:.82rem; color:var(--color-text-muted); max-width:16ch; line-height:1.3; }
+
+.hero-visual{
+  position:relative;
+  aspect-ratio:4/5;
+  border-radius:var(--radius);
+  overflow:hidden;
+  isolation:isolate;
+  box-shadow:0 40px 80px -30px rgba(0,0,0,.7);
+}
+.hero-visual .kb-img{
+  position:absolute; inset:0;
+  background-size:cover; background-position:center;
+  opacity:0;
+  animation:kenburns 14s var(--ease) infinite;
+}
+.hero-visual .kb-img:nth-child(1){ animation-delay:0s; }
+.hero-visual .kb-img:nth-child(2){ animation-delay:7s; }
+@keyframes kenburns{
+  0%{ opacity:0; transform:scale(1.06); }
+  6%{ opacity:1; }
+  44%{ opacity:1; transform:scale(1.14); }
+  50%{ opacity:0; transform:scale(1.14); }
+  100%{ opacity:0; }
+}
+.hero-visual::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.55) 100%);
+}
+.hero-floating-card{
+  position:absolute; left:1.2rem; bottom:1.2rem; z-index:2;
+  background:rgba(11,11,11,.72);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:14px;
+  padding:.9rem 1.1rem;
+  color:var(--color-white);
+  display:flex; align-items:center; gap:.7rem;
+  max-width:calc(100% - 2.4rem);
+}
+.hero-floating-card svg{ width:20px; height:20px; color:var(--color-green); flex-shrink:0; }
+.hero-floating-card strong{ display:block; font-size:.85rem; }
+.hero-floating-card span{ display:block; font-size:.72rem; color:var(--color-text-muted); }
+
+@media (prefers-reduced-motion: reduce){
+  .hero-visual .kb-img{ animation:none; opacity:1; }
+  .hero-visual .kb-img:nth-child(2){ display:none; }
+}
+
+/* ---------- marquee ---------- */
+.marquee-band{
+  background:var(--color-green);
+  color:var(--color-white);
+  overflow:hidden;
+  padding:.85rem 0;
+  border-top:6px solid var(--color-ink);
+  border-bottom:6px solid var(--color-ink);
+}
+.marquee-track{
+  display:flex; width:max-content;
+  gap:2.4rem;
+  animation:marquee 26s linear infinite;
+}
+.marquee-track span{
+  display:flex; align-items:center; gap:2.4rem;
+  font-family:var(--font-display);
+  font-size:1.05rem;
+  letter-spacing:.02em;
+  white-space:nowrap;
+}
+@keyframes marquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+@media (prefers-reduced-motion: reduce){ .marquee-track{ animation:none; } }
+
+/* ---------- section shells ---------- */
+section{ position:relative; }
+.section-pad{ padding:5.5rem 0; }
+@media (min-width:900px){ .section-pad{ padding:8rem 0; } }
+.section-dark{ background:var(--color-ink); color:var(--color-white); }
+.section-dark .muted{ color:var(--color-text-muted); }
+h2{ font-family:var(--font-display); font-size:clamp(1.7rem, 3.6vw, 2.6rem); line-height:1.16; max-width:18ch; }
+.section-dark h2{ color:var(--color-white); }
+.lede{ margin-top:1.1rem; font-size:1.05rem; max-width:52ch; color:#3f3e38; }
+.section-dark .lede{ color:var(--color-text-muted); }
+
+/* ---------- help section (bento asesoramiento) ---------- */
+.help-grid{
+  margin-top:3.2rem;
+  display:grid; gap:1rem;
+  grid-template-columns:1fr;
+}
+@media (min-width:720px){
+  .help-grid{ grid-template-columns:repeat(6, 1fr); }
+  .help-card:nth-child(1){ grid-column:span 2; }
+  .help-card:nth-child(2){ grid-column:span 2; }
+  .help-card:nth-child(3){ grid-column:span 2; }
+  .help-card:nth-child(4){ grid-column:span 3; }
+  .help-card:nth-child(5){ grid-column:span 3; }
+}
+.help-card{
+  background:var(--color-bg-soft);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius);
+  padding:1.8rem 1.6rem;
+  transition:transform .35s var(--ease), border-color .35s var(--ease), background .35s var(--ease);
+}
+.help-card:hover{ transform:translateY(-6px); border-color:rgba(44,145,68,.5); background:#171712; }
+.help-card .icon-wrap{
+  width:46px; height:46px; border-radius:12px;
+  background:rgba(44,145,68,.14);
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:1.1rem;
+}
+.help-card .icon-wrap svg{ width:22px; height:22px; color:var(--color-green); }
+.help-card h3{ font-size:1.02rem; font-weight:700; color:var(--color-white); margin-bottom:.4rem; }
+.help-card p{ font-size:.88rem; color:var(--color-text-muted); line-height:1.5; }
+
+/* ---------- split (precios) ---------- */
+.split{
+  display:grid; gap:2.5rem;
+  grid-template-columns:1fr;
+  align-items:center;
+}
+@media (min-width:900px){ .split{ grid-template-columns:1fr 1fr; gap:4rem; } }
+.split-media{ position:relative; border-radius:var(--radius); overflow:hidden; aspect-ratio:5/4; }
+.split-media img{ width:100%; height:100%; object-fit:cover; transition:transform .8s var(--ease); }
+.split-media:hover img{ transform:scale(1.05); }
+.split-tag{
+  position:absolute; top:1rem; left:1rem;
+  background:var(--color-red); color:var(--color-white);
+  font-weight:800; font-size:.78rem; letter-spacing:.03em;
+  padding:.5rem .9rem; border-radius:999px;
+}
+
+/* ---------- chat mockup ---------- */
+.chat-wrap{
+  display:grid; gap:3rem;
+  grid-template-columns:1fr;
+  align-items:center;
+}
+@media (min-width:960px){ .chat-wrap{ grid-template-columns:1fr 1fr; } }
+.chat-panel{
+  background:#0d1a12;
+  border-radius:24px;
+  padding:1.6rem 1.2rem 2rem;
+  border:1px solid rgba(44,145,68,.35);
+  box-shadow:0 30px 70px -30px rgba(0,0,0,.6);
+  max-width:380px;
+  margin:0 auto;
+}
+.chat-header{ display:flex; align-items:center; gap:.7rem; padding-bottom:1rem; border-bottom:1px solid rgba(255,255,255,.08); margin-bottom:1.2rem; }
+.chat-header img{ width:34px; height:34px; border-radius:50%; background:var(--color-white); padding:5px; }
+.chat-header strong{ color:var(--color-white); font-size:.9rem; display:block; }
+.chat-header span{ color:var(--color-green); font-size:.72rem; }
+.chat-bubbles{ display:flex; flex-direction:column; gap:.7rem; }
+.bubble{
+  max-width:82%; padding:.75rem 1rem; border-radius:14px; font-size:.86rem; line-height:1.4;
+  opacity:0; transform:translateY(14px) scale(.96);
+  transition:opacity .5s var(--ease), transform .5s var(--ease);
+}
+.bubble.is-visible{ opacity:1; transform:translateY(0) scale(1); }
+.bubble.in{ align-self:flex-start; background:#1e2b22; color:var(--color-white); border-bottom-left-radius:4px; }
+.bubble.out{ align-self:flex-end; background:var(--color-green); color:var(--color-white); border-bottom-right-radius:4px; }
+
+/* ---------- products bento ---------- */
+.products-grid{
+  margin-top:3rem;
+  display:grid; gap:1.1rem;
+  grid-template-columns:1fr;
+}
+@media (min-width:760px){ .products-grid{ grid-template-columns:repeat(4, 1fr); } }
+.product-card{
+  position:relative;
+  border-radius:var(--radius);
+  overflow:hidden;
+  aspect-ratio:3/4;
+}
+.product-card img{ width:100%; height:100%; object-fit:cover; transition:transform .7s var(--ease); }
+.product-card:hover img{ transform:scale(1.08); }
+.product-card::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,.82) 100%);
+}
+.product-card .label{
+  position:absolute; left:1rem; right:1rem; bottom:1rem; z-index:2;
+  color:var(--color-white);
+}
+.product-card .label strong{ font-family:var(--font-display); font-size:1.15rem; display:block; line-height:1.15; }
+.product-card .label span{ font-size:.78rem; color:#d8d8d2; }
+.products-foot{ margin-top:2rem; text-align:center; }
+.products-foot a{ font-weight:700; color:var(--color-green); border-bottom:2px solid var(--color-green); padding-bottom:2px; }
+
+/* ---------- asado parallax ---------- */
+.asado{
+  min-height:80vh;
+  display:flex; align-items:center;
+  color:var(--color-white);
+  overflow:hidden;
+}
+.asado-bg{
+  position:absolute; inset:-8% 0; z-index:0;
+  background:url('assets/photos/equipo-mundial.jpg') center 55%/cover no-repeat;
+  will-change:transform;
+}
+.asado::before{
+  content:""; position:absolute; inset:0; z-index:1;
+  background:linear-gradient(180deg, rgba(11,11,11,.55) 0%, rgba(11,11,11,.85) 75%);
+}
+.asado-content{ position:relative; z-index:2; max-width:640px; }
+.asado h2{ color:var(--color-white); }
+
+/* ---------- manifesto ---------- */
+.manifesto{ text-align:center; }
+.manifesto .quote-mark{ width:34px; height:34px; color:var(--color-green); margin:0 auto 1.2rem; }
+.manifesto h2{ max-width:22ch; margin:0 auto; font-size:clamp(1.9rem, 4.4vw, 3.1rem); }
+.manifesto p{ max-width:52ch; margin:1.4rem auto 0; color:var(--color-text-muted); font-size:1.05rem; }
+
+/* ---------- coverflow gallery ---------- */
+.gallery-wrap{ margin-top:3rem; }
+.coverflow{
+  position:relative;
+  height:min(58vw, 420px);
+  display:flex; align-items:center; justify-content:center;
+  perspective:1400px;
+  touch-action:pan-y;
+  cursor:grab;
+}
+.coverflow:active{ cursor:grabbing; }
+.cf-track{ position:relative; width:100%; height:100%; transform-style:preserve-3d; }
+.cf-item{
+  position:absolute; top:50%; left:50%;
+  width:min(66vw, 300px); aspect-ratio:3/4;
+  border-radius:14px; overflow:hidden;
+  box-shadow:0 30px 50px -20px rgba(0,0,0,.55);
+  transition:transform .6s var(--ease), opacity .6s var(--ease);
+  transform-style:preserve-3d;
+  cursor:pointer;
+}
+.cf-item img{ width:100%; height:100%; object-fit:cover; }
+.cf-controls{ display:flex; justify-content:center; gap:.9rem; margin-top:1.8rem; }
+.cf-btn{
+  width:44px; height:44px; border-radius:50%;
+  background:#1a1a1a; color:var(--color-white);
+  display:flex; align-items:center; justify-content:center;
+  border:none; transition:transform .2s var(--ease), background .2s var(--ease);
+}
+.cf-btn:hover{ background:var(--color-green); transform:scale(1.06); }
+.cf-btn svg{ width:20px; height:20px; }
+
+/* ---------- footer ---------- */
+.site-footer{ background:var(--color-ink); color:var(--color-white); padding:4.5rem 0 2rem; }
+.footer-grid{
+  display:grid; gap:2.6rem;
+  grid-template-columns:1fr;
+}
+@media (min-width:900px){ .footer-grid{ grid-template-columns:1.1fr .8fr 1fr; gap:3rem; } }
+.footer-brand{ display:flex; align-items:center; gap:.7rem; margin-bottom:1.1rem; }
+.footer-brand img{ width:40px; height:40px; filter:invert(1); }
+.footer-brand span{ font-family:var(--font-display); font-size:1.15rem; }
+.footer-col h4{ font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--color-green); margin-bottom:1rem; }
+.footer-line{ display:flex; align-items:flex-start; gap:.7rem; margin-bottom:.9rem; color:var(--color-text-muted); font-size:.92rem; }
+.footer-line svg{ width:18px; height:18px; color:var(--color-green); flex-shrink:0; margin-top:2px; }
+.footer-line a:hover{ color:var(--color-white); }
+.map-frame{ border-radius:14px; overflow:hidden; border:1px solid var(--color-border); aspect-ratio:4/3; }
+.map-frame iframe{ width:100%; height:100%; border:0; filter:grayscale(.4) invert(.92) contrast(.9); }
+.footer-bottom{
+  margin-top:3.5rem; padding-top:1.8rem; border-top:1px solid var(--color-border);
+  display:flex; flex-direction:column; gap:.6rem;
+  font-size:.8rem; color:var(--color-text-muted);
+}
+@media (min-width:700px){ .footer-bottom{ flex-direction:row; justify-content:space-between; } }
+.footer-bottom a{ color:var(--color-text-muted); }
+.footer-bottom a:hover{ color:var(--color-white); }
+
+/* ---------- whatsapp fab ---------- */
+.wa-fab{
+  position:fixed; right:1.3rem; bottom:1.3rem; z-index:80;
+  width:58px; height:58px; border-radius:50%;
+  background:var(--color-green);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 14px 30px -10px rgba(44,145,68,.65);
+  transition:transform .3s var(--ease);
+}
+.wa-fab:hover{ transform:scale(1.08); }
+.wa-fab svg{ width:28px; height:28px; color:var(--color-white); }
 </style>
 </head>
 <body>
 
-<section class="container" style="min-height:100vh; display:flex; align-items:center;">
-  <div class="reveal">
-    <h1>Nombre del cliente</h1>
-    <p>Punto de partida — reemplazar por la identidad de marca real.</p>
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <a href="#top" class="brand">
+      <img src="assets/logo-cow.png" alt="La Mejor Carnicería">
+      <span class="brand-word">La Mejor<br>Carnicería<span>Mataderos</span></span>
+    </a>
+    <nav class="main-nav">
+      <a href="#ayuda">Cómo te ayudamos</a>
+      <a href="#productos">Productos</a>
+      <a href="#precios">Precios</a>
+      <a href="#ubicacion">Ubicación</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn header-cta" href="https://wa.me/5491146874050?text=Hola!%20Quiero%20hacer%20una%20consulta" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.28-.14-1.64-.81-1.9-.9-.25-.1-.44-.14-.62.14-.18.28-.72.9-.88 1.08-.16.18-.32.2-.6.07-.28-.14-1.17-.43-2.23-1.38-.82-.73-1.38-1.64-1.54-1.92-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.48.14-.16.18-.28.28-.46.09-.18.05-.34-.02-.48-.07-.14-.62-1.5-.85-2.05-.22-.53-.45-.46-.62-.47-.16-.01-.34-.01-.53-.01-.18 0-.48.07-.73.34-.25.28-.96.94-.96 2.28 0 1.34.98 2.64 1.12 2.82.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.25.18 1.72.11.53-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33z"/><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.08L2 22l5.06-1.33A9.94 9.94 0 0 0 12.02 22C17.55 22 22 17.52 22 12S17.55 2 12.02 2zm0 18.15a8.1 8.1 0 0 1-4.14-1.13l-.3-.18-3 .79.8-2.92-.2-.3A8.14 8.14 0 1 1 20.16 12a8.15 8.15 0 0 1-8.14 8.15z"/></svg>
+        Consultar por WhatsApp
+      </a>
+      <button class="menu-btn" id="menuOpen" aria-label="Abrir menú">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </button>
+    </div>
   </div>
-</section>
+</header>
+
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-top">
+    <a href="#top" class="brand">
+      <img src="assets/logo-cow.png" alt="La Mejor Carnicería" style="filter:invert(1);">
+    </a>
+    <button id="menuClose" aria-label="Cerrar menú">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <nav>
+    <a href="#ayuda">Cómo te ayudamos</a>
+    <a href="#productos">Productos</a>
+    <a href="#precios">Precios</a>
+    <a href="#ubicacion">Ubicación</a>
+  </nav>
+  <a class="btn" href="https://wa.me/5491146874050?text=Hola!%20Quiero%20hacer%20una%20consulta" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+</div>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="hero-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Rodó 6499, Mataderos
+        </span>
+        <h1 class="reveal">Buena carne, buen precio y <em>alguien que te ayude.</em></h1>
+        <p class="reveal" style="--i:1">Te ayudamos a elegir la opción justa según qué vas a cocinar, para cuántos y cuánto querés gastar.</p>
+        <div class="hero-ctas reveal" style="--i:2">
+          <a class="btn" href="https://wa.me/5491146874050?text=Hola!%20Quiero%20hacer%20una%20consulta" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.28-.14-1.64-.81-1.9-.9-.25-.1-.44-.14-.62.14-.18.28-.72.9-.88 1.08-.16.18-.32.2-.6.07-.28-.14-1.17-.43-2.23-1.38-.82-.73-1.38-1.64-1.54-1.92-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.48.14-.16.18-.28.28-.46.09-.18.05-.34-.02-.48-.07-.14-.62-1.5-.85-2.05-.22-.53-.45-.46-.62-.47-.16-.01-.34-.01-.53-.01-.18 0-.48.07-.73.34-.25.28-.96.94-.96 2.28 0 1.34.98 2.64 1.12 2.82.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.25.18 1.72.11.53-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33z"/><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.08L2 22l5.06-1.33A9.94 9.94 0 0 0 12.02 22C17.55 22 22 17.52 22 12S17.55 2 12.02 2zm0 18.15a8.1 8.1 0 0 1-4.14-1.13l-.3-.18-3 .79.8-2.92-.2-.3A8.14 8.14 0 1 1 20.16 12a8.15 8.15 0 0 1-8.14 8.15z"/></svg>
+            Consultar por WhatsApp
+          </a>
+          <a class="btn btn-outline" href="tel:0114687-4050">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+            4687-4050
+          </a>
+        </div>
+        <div class="hero-stat reveal" style="--i:3">
+          <span class="num">+30</span>
+          <span class="label">años eligiendo carne de calidad en el barrio</span>
+        </div>
+      </div>
+      <div class="hero-visual reveal-scale" style="--i:2">
+        <div class="kb-img" style="background-image:url('assets/photos/storefront-wide.jpg')"></div>
+        <div class="kb-img" style="background-image:url('assets/photos/corte-costillar.jpg')"></div>
+        <div class="hero-floating-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+          <div>
+            <strong>Vaca, cerdo y pollo</strong>
+            <span>Cortes frescos todos los días</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee-band">
+    <div class="marquee-track">
+      <span>PRECIOS PARA TODOS LOS BOLSILLOS</span>
+      <span>CORTES DE VACA, CERDO Y POLLO</span>
+      <span>+30 AÑOS EN MATADEROS</span>
+      <span>ASESORAMIENTO SEGÚN TU PRESUPUESTO</span>
+      <span>PIEZAS COMPLETAS Y PROMOS</span>
+      <span>PRECIOS PARA TODOS LOS BOLSILLOS</span>
+      <span>CORTES DE VACA, CERDO Y POLLO</span>
+      <span>+30 AÑOS EN MATADEROS</span>
+      <span>ASESORAMIENTO SEGÚN TU PRESUPUESTO</span>
+      <span>PIEZAS COMPLETAS Y PROMOS</span>
+    </div>
+  </div>
+
+  <section class="section-pad section-dark" id="ayuda">
+    <div class="container">
+      <h2 class="reveal">Acá no tenés que saber de carne para comprar bien.</h2>
+      <p class="lede reveal" style="--i:1">Contanos qué querés cocinar y nosotros te orientamos para que te lleves una opción que realmente te sirva, sin gastar de más.</p>
+      <div class="help-grid">
+        <div class="help-card reveal" style="--i:2">
+          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14h.01"/><path d="M7 7h12a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/><path d="M17 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h.5"/></svg></div>
+          <h3>Tu presupuesto</h3>
+          <p>Decinos cuánto querés gastar y armamos la opción que más te conviene.</p>
+        </div>
+        <div class="help-card reveal" style="--i:3">
+          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>Para cuántos son</h3>
+          <p>Te ayudamos a calcular cuánto llevar según la cantidad de comensales.</p>
+        </div>
+        <div class="help-card reveal" style="--i:4">
+          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
+          <h3>Cómo lo vas a cocinar</h3>
+          <p>Parrilla, horno, plancha o guiso, cada preparación pide un corte distinto.</p>
+        </div>
+        <div class="help-card reveal" style="--i:5">
+          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg></div>
+          <h3>Tierno, rendidor o rápido</h3>
+          <p>Buscamos junto a vos la textura y el rinde que necesitás para esa comida.</p>
+        </div>
+        <div class="help-card reveal" style="--i:6">
+          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <h3>Promos del día</h3>
+          <p>Te avisamos si hay una oferta que se ajusta mejor a lo que estás por llevar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad" id="precios">
+    <div class="container split">
+      <div class="split-media reveal-scale">
+        <img src="assets/photos/storefront-precios.jpg" alt="Pizarras con precios en La Mejor Carnicería" loading="lazy">
+        <span class="split-tag">Precios en pizarra, todos los días</span>
+      </div>
+      <div class="reveal" style="--i:1">
+        <h2 style="color:var(--color-ink)">Precios pensados para que compres mejor.</h2>
+        <p class="lede">No hace falta ir siempre al mismo corte. Muchas veces conviene otra opción que rinde igual o más, y te permite gastar menos. Preguntanos qué tenemos hoy.</p>
+        <div class="hero-ctas" style="margin-top:2rem">
+          <a class="btn btn-dark" href="https://wa.me/5491146874050?text=Hola!%20Quiero%20consultar%20precios%20y%20promociones" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.28-.14-1.64-.81-1.9-.9-.25-.1-.44-.14-.62.14-.18.28-.72.9-.88 1.08-.16.18-.32.2-.6.07-.28-.14-1.17-.43-2.23-1.38-.82-.73-1.38-1.64-1.54-1.92-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.48.14-.16.18-.28.28-.46.09-.18.05-.34-.02-.48-.07-.14-.62-1.5-.85-2.05-.22-.53-.45-.46-.62-.47-.16-.01-.34-.01-.53-.01-.18 0-.48.07-.73.34-.25.28-.96.94-.96 2.28 0 1.34.98 2.64 1.12 2.82.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.25.18 1.72.11.53-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33z"/><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.08L2 22l5.06-1.33A9.94 9.94 0 0 0 12.02 22C17.55 22 22 17.52 22 12S17.55 2 12.02 2zm0 18.15a8.1 8.1 0 0 1-4.14-1.13l-.3-.18-3 .79.8-2.92-.2-.3A8.14 8.14 0 1 1 20.16 12a8.15 8.15 0 0 1-8.14 8.15z"/></svg>
+            Consultar por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad section-dark">
+    <div class="container chat-wrap">
+      <div class="chat-copy reveal">
+        <h2>Decinos cuánto querés gastar. Te ayudamos a resolver el resto.</h2>
+        <p class="lede">Con esa información pensamos juntos qué corte llevar, cuánto comprar y cómo hacerlo rendir. Eso es lo que nos diferencia de una simple lista de precios.</p>
+      </div>
+      <div class="reveal-scale" style="--i:1">
+        <div class="chat-panel">
+          <div class="chat-header">
+            <img src="assets/logo-cow.png" alt="">
+            <div>
+              <strong>La Mejor Carnicería</strong>
+              <span>En línea</span>
+            </div>
+          </div>
+          <div class="chat-bubbles" id="chatBubbles">
+            <div class="bubble out">Hola! Somos 4 y quiero gastar cerca de $30.000, ¿qué me conviene?</div>
+            <div class="bubble in">Con ese presupuesto te arma bien un vacío más un poco de matambre. Rinde para los 4 y sobra para el día siguiente.</div>
+            <div class="bubble out">Perfecto, ¿lo puedo pasar a buscar hoy?</div>
+            <div class="bubble in">Sí, te lo dejamos listo. Cualquier duda, seguimos hablando por acá.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad" id="productos">
+    <div class="container">
+      <h2 class="reveal" style="color:var(--color-ink)">Una opción para cada comida y cada presupuesto.</h2>
+      <div class="products-grid">
+        <div class="product-card reveal" style="--i:1">
+          <img src="assets/photos/mano-corte.jpg" alt="Cortes prácticos para el día a día" loading="lazy">
+          <div class="label"><strong>Para todos los días</strong><span>Bifes, milanesas y cortes prácticos</span></div>
+        </div>
+        <div class="product-card reveal" style="--i:2">
+          <img src="assets/photos/corte-costillar.jpg" alt="Cortes rendidores para horno y olla" loading="lazy">
+          <div class="label"><strong>Horno y olla</strong><span>Opciones rendidoras para varios</span></div>
+        </div>
+        <div class="product-card reveal" style="--i:3">
+          <img src="assets/photos/carnicero-trabajando.jpg" alt="Cortes clásicos para la parrilla" loading="lazy">
+          <div class="label"><strong>Para la parrilla</strong><span>Los clásicos y alguna alternativa</span></div>
+        </div>
+        <div class="product-card reveal" style="--i:4">
+          <img src="assets/photos/storefront-wide.jpg" alt="Piezas completas para comprar en cantidad" loading="lazy">
+          <div class="label"><strong>Para comprar en cantidad</strong><span>Piezas completas al mejor precio</span></div>
+        </div>
+      </div>
+      <div class="products-foot reveal" style="--i:5">
+        <a href="https://wa.me/5491146874050?text=Hola!%20No%20s%C3%A9%20qu%C3%A9%20corte%20me%20conviene" target="_blank" rel="noopener">¿No sabés cuál te conviene? Preguntanos.</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="asado section-pad">
+    <div class="asado-bg" id="asadoBg"></div>
+    <div class="container asado-content">
+      <h2 class="reveal">Un buen asado no tiene por qué salir una fortuna.</h2>
+      <p class="lede reveal" style="--i:1; color:var(--color-text-muted)">Contanos cuántos son, cuánto querés gastar y qué les gusta. Combinamos distintos cortes para lograr cantidad, variedad y buen precio.</p>
+      <div class="reveal" style="--i:2; margin-top:2rem">
+        <a class="btn" href="https://wa.me/5491146874050?text=Hola!%20Quiero%20armar%20un%20asado" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.28-.14-1.64-.81-1.9-.9-.25-.1-.44-.14-.62.14-.18.28-.72.9-.88 1.08-.16.18-.32.2-.6.07-.28-.14-1.17-.43-2.23-1.38-.82-.73-1.38-1.64-1.54-1.92-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.48.14-.16.18-.28.28-.46.09-.18.05-.34-.02-.48-.07-.14-.62-1.5-.85-2.05-.22-.53-.45-.46-.62-.47-.16-.01-.34-.01-.53-.01-.18 0-.48.07-.73.34-.25.28-.96.94-.96 2.28 0 1.34.98 2.64 1.12 2.82.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.25.18 1.72.11.53-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33z"/><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.08L2 22l5.06-1.33A9.94 9.94 0 0 0 12.02 22C17.55 22 22 17.52 22 12S17.55 2 12.02 2zm0 18.15a8.1 8.1 0 0 1-4.14-1.13l-.3-.18-3 .79.8-2.92-.2-.3A8.14 8.14 0 1 1 20.16 12a8.15 8.15 0 0 1-8.14 8.15z"/></svg>
+          Consultar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad manifesto">
+    <div class="container">
+      <svg class="quote-mark reveal-scale" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+      <h2 class="reveal" style="--i:1; color:var(--color-ink)">La atención de siempre. Precios para volver.</h2>
+      <p class="reveal" style="--i:2">Somos una carnicería de barrio. Nos importa que encuentres buenos productos, buenos precios y que cuando tengas una duda haya alguien del otro lado del mostrador para ayudarte.</p>
+    </div>
+  </section>
+
+  <section class="section-pad section-dark">
+    <div class="container">
+      <h2 class="reveal">Más de 30 años en el mostrador.</h2>
+      <p class="lede reveal" style="--i:1">Familia, fútbol y buena carne. Así se vive el día a día en Rodó 6499.</p>
+      <div class="gallery-wrap">
+        <div class="coverflow" id="coverflow">
+          <div class="cf-track" id="cfTrack">
+            <div class="cf-item" data-index="0"><img src="assets/photos/storefront-wide.jpg" alt="Frente de La Mejor Carnicería" loading="lazy"></div>
+            <div class="cf-item" data-index="1"><img src="assets/photos/corte-costillar.jpg" alt="Costillar fresco en la vitrina" loading="lazy"></div>
+            <div class="cf-item" data-index="2"><img src="assets/photos/carnicero-trabajando.jpg" alt="Carnicero preparando un corte" loading="lazy"></div>
+            <div class="cf-item" data-index="3"><img src="assets/photos/mano-corte.jpg" alt="Detalle de un corte de carne" loading="lazy"></div>
+            <div class="cf-item" data-index="4"><img src="assets/photos/equipo-mundial.jpg" alt="El equipo de La Mejor Carnicería en el barrio" loading="lazy"></div>
+            <div class="cf-item" data-index="5"><img src="assets/photos/storefront-precios.jpg" alt="Pizarras de precios del día" loading="lazy"></div>
+          </div>
+        </div>
+        <div class="cf-controls">
+          <button class="cf-btn" id="cfPrev" aria-label="Foto anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <button class="cf-btn" id="cfNext" aria-label="Foto siguiente">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" id="ubicacion">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo-cow.png" alt="La Mejor Carnicería">
+          <span>La Mejor<br>Carnicería</span>
+        </div>
+        <p style="max-width:32ch; font-size:.9rem; color:var(--color-text-muted)">Carnicería de barrio en Mataderos. Buenos precios, buena carne y alguien que te ayude a elegir.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <div class="footer-line">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Rodó 6499, Mataderos, CABA</span>
+        </div>
+        <div class="footer-line">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+          <a href="tel:0114687-4050">011 4687-4050</a>
+        </div>
+        <div class="footer-line">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          <a href="https://instagram.com/lamejor.carniceria" target="_blank" rel="noopener">@lamejor.carniceria</a>
+        </div>
+        <a class="btn" style="margin-top:1rem" href="https://wa.me/5491146874050?text=Hola!%20Quiero%20hacer%20una%20consulta" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.28-.14-1.64-.81-1.9-.9-.25-.1-.44-.14-.62.14-.18.28-.72.9-.88 1.08-.16.18-.32.2-.6.07-.28-.14-1.17-.43-2.23-1.38-.82-.73-1.38-1.64-1.54-1.92-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.48.14-.16.18-.28.28-.46.09-.18.05-.34-.02-.48-.07-.14-.62-1.5-.85-2.05-.22-.53-.45-.46-.62-.47-.16-.01-.34-.01-.53-.01-.18 0-.48.07-.73.34-.25.28-.96.94-.96 2.28 0 1.34.98 2.64 1.12 2.82.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.25.18 1.72.11.53-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33z"/><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.08L2 22l5.06-1.33A9.94 9.94 0 0 0 12.02 22C17.55 22 22 17.52 22 12S17.55 2 12.02 2zm0 18.15a8.1 8.1 0 0 1-4.14-1.13l-.3-.18-3 .79.8-2.92-.2-.3A8.14 8.14 0 1 1 20.16 12a8.15 8.15 0 0 1-8.14 8.15z"/></svg>
+          Consultar por WhatsApp
+        </a>
+      </div>
+      <div class="footer-col">
+        <h4>Cómo llegar</h4>
+        <div class="map-frame">
+          <iframe src="https://www.google.com/maps?q=Rod%C3%B3%206499,%20Mataderos,%20Buenos%20Aires&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación de La Mejor Carnicería"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> La Mejor Carnicería. Todos los derechos reservados.</span>
+      <a href="https://reentrystyle.com" target="_blank" rel="noopener">Sitio realizado por Reentry Style</a>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-fab" href="https://wa.me/5491146874050?text=Hola!%20Quiero%20hacer%20una%20consulta" target="_blank" rel="noopener" aria-label="Consultar por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.28-.14-1.64-.81-1.9-.9-.25-.1-.44-.14-.62.14-.18.28-.72.9-.88 1.08-.16.18-.32.2-.6.07-.28-.14-1.17-.43-2.23-1.38-.82-.73-1.38-1.64-1.54-1.92-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.48.14-.16.18-.28.28-.46.09-.18.05-.34-.02-.48-.07-.14-.62-1.5-.85-2.05-.22-.53-.45-.46-.62-.47-.16-.01-.34-.01-.53-.01-.18 0-.48.07-.73.34-.25.28-.96.94-.96 2.28 0 1.34.98 2.64 1.12 2.82.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.25.18 1.72.11.53-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33z"/><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.08L2 22l5.06-1.33A9.94 9.94 0 0 0 12.02 22C17.55 22 22 17.52 22 12S17.55 2 12.02 2zm0 18.15a8.1 8.1 0 0 1-4.14-1.13l-.3-.18-3 .79.8-2.92-.2-.3A8.14 8.14 0 1 1 20.16 12a8.15 8.15 0 0 1-8.14 8.15z"/></svg>
+</a>
 
 <script>
 (function(){
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var els = document.querySelectorAll('.reveal');
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ---- scroll reveal ---- */
+  var revealEls = document.querySelectorAll('.reveal, .reveal-scale, .bubble');
   if('IntersectionObserver' in window && !reduceMotion){
     var obs = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
         if(e.isIntersecting){ e.target.classList.add('is-visible'); obs.unobserve(e.target); }
       });
-    }, { threshold:0.15 });
-    els.forEach(function(el){ obs.observe(el); });
+    }, { threshold:0.18 });
+    revealEls.forEach(function(el){ obs.observe(el); });
   } else {
-    els.forEach(function(el){ el.classList.add('is-visible'); });
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  /* stagger the chat bubbles a bit more distinctly */
+  var bubbles = document.querySelectorAll('#chatBubbles .bubble');
+  bubbles.forEach(function(b, i){ b.style.transitionDelay = (i * 300) + 'ms'; });
+
+  /* ---- header scroll state ---- */
+  var header = document.getElementById('siteHeader');
+  var sentinel = document.querySelector('.hero');
+  if(sentinel && 'IntersectionObserver' in window){
+    var headerObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        header.classList.toggle('is-scrolled', !e.isIntersecting);
+      });
+    }, { rootMargin: '-90% 0px 0px 0px' });
+    headerObs.observe(sentinel);
+  }
+
+  /* ---- mobile drawer ---- */
+  var drawer = document.getElementById('mobileDrawer');
+  var openBtn = document.getElementById('menuOpen');
+  var closeBtn = document.getElementById('menuClose');
+  if(openBtn){ openBtn.addEventListener('click', function(){ drawer.classList.add('is-open'); document.body.style.overflow='hidden'; }); }
+  if(closeBtn){ closeBtn.addEventListener('click', function(){ drawer.classList.remove('is-open'); document.body.style.overflow=''; }); }
+  drawer.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ drawer.classList.remove('is-open'); document.body.style.overflow=''; });
+  });
+
+  /* ---- asado parallax (rAF, only while in view, skipped on reduced motion) ---- */
+  var asadoBg = document.getElementById('asadoBg');
+  if(asadoBg && !reduceMotion){
+    var asadoSection = asadoBg.closest('.asado');
+    var inView = false;
+    var ticking = false;
+    function updateParallax(){
+      if(!inView){ ticking = false; return; }
+      var rect = asadoSection.getBoundingClientRect();
+      var offset = (rect.top) * 0.15;
+      asadoBg.style.transform = 'translateY(' + offset + 'px)';
+      requestAnimationFrame(updateParallax);
+    }
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          inView = e.isIntersecting;
+          if(inView && !ticking){ ticking = true; requestAnimationFrame(updateParallax); }
+        });
+      }, { threshold:0 }).observe(asadoSection);
+    }
+  }
+
+  /* ---- coverflow carousel ---- */
+  var cfTrack = document.getElementById('cfTrack');
+  var cfItems = cfTrack ? Array.prototype.slice.call(cfTrack.querySelectorAll('.cf-item')) : [];
+  var current = 0;
+
+  function layoutCoverflow(){
+    cfItems.forEach(function(item, i){
+      var offset = i - current;
+      var abs = Math.abs(offset);
+      var x = offset * 62;
+      var z = -abs * 90;
+      var rotate = offset * -28;
+      var scale = abs === 0 ? 1 : 0.78;
+      var opacity = abs > 2 ? 0 : 1 - abs * 0.18;
+      item.style.transform = 'translate(-50%,-50%) translateX(' + x + '%) translateZ(' + z + 'px) rotateY(' + rotate + 'deg) scale(' + scale + ')';
+      item.style.zIndex = 10 - abs;
+      item.style.opacity = opacity;
+      item.style.pointerEvents = abs > 2 ? 'none' : 'auto';
+    });
+  }
+  function goTo(i){
+    current = (i + cfItems.length) % cfItems.length;
+    layoutCoverflow();
+  }
+  if(cfItems.length){
+    layoutCoverflow();
+    cfItems.forEach(function(item, i){
+      item.addEventListener('click', function(){ goTo(i); });
+    });
+    document.getElementById('cfPrev').addEventListener('click', function(){ goTo(current - 1); });
+    document.getElementById('cfNext').addEventListener('click', function(){ goTo(current + 1); });
+
+    /* drag / swipe */
+    var track = document.getElementById('coverflow');
+    var startX = 0, dragging = false;
+    track.addEventListener('pointerdown', function(e){ dragging = true; startX = e.clientX; });
+    window.addEventListener('pointerup', function(e){
+      if(!dragging) return;
+      dragging = false;
+      var dx = e.clientX - startX;
+      if(dx > 40) goTo(current - 1);
+      else if(dx < -40) goTo(current + 1);
+    });
+
+    window.addEventListener('resize', layoutCoverflow);
   }
 })();
 </script>
