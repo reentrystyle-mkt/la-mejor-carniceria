@@ -391,26 +391,6 @@ h2{ font-family:var(--font-display); font-size:clamp(1.7rem, 3.6vw, 2.6rem); lin
 .products-foot{ margin-top:2rem; text-align:center; }
 .products-foot a{ font-weight:700; color:var(--color-green); border-bottom:2px solid var(--color-green); padding-bottom:2px; }
 
-/* ---------- asado parallax ---------- */
-.asado{
-  min-height:80vh;
-  display:flex; align-items:center;
-  color:var(--color-white);
-  overflow:hidden;
-}
-.asado-bg{
-  position:absolute; inset:-8% 0; z-index:0;
-  background:url('assets/photos/equipo-mundial.jpg') center 55%/cover no-repeat;
-  will-change:transform;
-}
-.asado::before{
-  content:""; position:absolute; inset:0; z-index:1;
-  background:linear-gradient(100deg, rgba(11,11,11,.92) 0%, rgba(11,11,11,.78) 42%, rgba(11,11,11,.4) 75%);
-}
-.asado-content{ position:relative; z-index:2; max-width:640px; }
-.asado h2{ color:var(--color-white); text-shadow:0 2px 12px rgba(0,0,0,.4); }
-.asado-lede{ color:#e4e3de !important; text-shadow:0 1px 8px rgba(0,0,0,.5); }
-
 /* ---------- manifesto ---------- */
 .manifesto{ text-align:center; }
 .manifesto .quote-mark{ width:34px; height:34px; color:var(--color-green); margin:0 auto 1.2rem; }
@@ -558,8 +538,8 @@ h2{ font-family:var(--font-display); font-size:clamp(1.7rem, 3.6vw, 2.6rem); lin
         </div>
       </div>
       <div class="hero-visual reveal-scale" style="--i:2">
-        <div class="kb-img" style="background-image:url('assets/photos/storefront-wide.jpg')"></div>
         <div class="kb-img" style="background-image:url('assets/photos/corte-costillar.jpg')"></div>
+        <div class="kb-img" style="background-image:url('assets/photos/carnicero-trabajando.jpg')"></div>
         <div class="hero-floating-card">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
           <div>
@@ -613,8 +593,8 @@ h2{ font-family:var(--font-display); font-size:clamp(1.7rem, 3.6vw, 2.6rem); lin
   <section class="section-pad" id="precios">
     <div class="container split">
       <div class="split-media reveal-scale">
-        <img src="assets/photos/storefront-precios.jpg" alt="Pizarras con precios en La Mejor Carnicería" loading="lazy">
-        <span class="split-tag">Precios en pizarra, todos los días</span>
+        <img src="assets/photos/equipo-mundial.jpg" alt="Frente de La Mejor Carnicería en Rodó 6499" loading="lazy">
+        <span class="split-tag">+30 años en el barrio</span>
       </div>
       <div class="reveal" style="--i:1">
         <h2 style="color:var(--color-ink)">Precios pensados para que compres mejor.</h2>
@@ -695,20 +675,6 @@ h2{ font-family:var(--font-display); font-size:clamp(1.7rem, 3.6vw, 2.6rem); lin
     </div>
   </section>
 
-  <section class="asado section-pad">
-    <div class="asado-bg" id="asadoBg"></div>
-    <div class="container asado-content">
-      <h2 class="reveal">Un buen asado no tiene por qué salir una fortuna.</h2>
-      <p class="lede reveal asado-lede" style="--i:1">Contanos cuántos son, cuánto querés gastar y qué les gusta. Combinamos distintos cortes para lograr cantidad, variedad y buen precio.</p>
-      <div class="reveal" style="--i:2; margin-top:2rem">
-        <a class="btn" href="https://wa.me/5491146874050?text=Hola!%20Quiero%20armar%20un%20asado" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.28-.14-1.64-.81-1.9-.9-.25-.1-.44-.14-.62.14-.18.28-.72.9-.88 1.08-.16.18-.32.2-.6.07-.28-.14-1.17-.43-2.23-1.38-.82-.73-1.38-1.64-1.54-1.92-.16-.28-.02-.43.12-.57.13-.13.28-.32.42-.48.14-.16.18-.28.28-.46.09-.18.05-.34-.02-.48-.07-.14-.62-1.5-.85-2.05-.22-.53-.45-.46-.62-.47-.16-.01-.34-.01-.53-.01-.18 0-.48.07-.73.34-.25.28-.96.94-.96 2.28 0 1.34.98 2.64 1.12 2.82.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.58.66.21 1.25.18 1.72.11.53-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33z"/><path d="M12.02 2C6.5 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.08L2 22l5.06-1.33A9.94 9.94 0 0 0 12.02 22C17.55 22 22 17.52 22 12S17.55 2 12.02 2zm0 18.15a8.1 8.1 0 0 1-4.14-1.13l-.3-.18-3 .79.8-2.92-.2-.3A8.14 8.14 0 1 1 20.16 12a8.15 8.15 0 0 1-8.14 8.15z"/></svg>
-          Consultar por WhatsApp
-        </a>
-      </div>
-    </div>
-  </section>
-
   <section class="section-pad manifesto">
     <div class="container">
       <svg class="quote-mark reveal-scale" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
@@ -724,12 +690,9 @@ h2{ font-family:var(--font-display); font-size:clamp(1.7rem, 3.6vw, 2.6rem); lin
       <div class="gallery-wrap">
         <div class="coverflow" id="coverflow">
           <div class="cf-track" id="cfTrack">
-            <div class="cf-item" data-index="0"><img src="assets/photos/storefront-wide.jpg" alt="Frente de La Mejor Carnicería" loading="lazy"></div>
-            <div class="cf-item" data-index="1"><img src="assets/photos/corte-costillar.jpg" alt="Costillar fresco en la vitrina" loading="lazy"></div>
+            <div class="cf-item" data-index="0"><img src="assets/photos/corte-costillar.jpg" alt="Costillar fresco en la vitrina" loading="lazy"></div>
+            <div class="cf-item" data-index="1"><img src="assets/photos/equipo-mundial.jpg" alt="El equipo de La Mejor Carnicería en el barrio" loading="lazy"></div>
             <div class="cf-item" data-index="2"><img src="assets/photos/carnicero-trabajando.jpg" alt="Carnicero preparando un corte" loading="lazy"></div>
-            <div class="cf-item" data-index="3"><img src="assets/photos/mano-corte.jpg" alt="Detalle de un corte de carne" loading="lazy"></div>
-            <div class="cf-item" data-index="4"><img src="assets/photos/equipo-mundial.jpg" alt="El equipo de La Mejor Carnicería en el barrio" loading="lazy"></div>
-            <div class="cf-item" data-index="5"><img src="assets/photos/storefront-precios.jpg" alt="Pizarras de precios del día" loading="lazy"></div>
           </div>
         </div>
         <div class="cf-controls">
@@ -837,29 +800,6 @@ h2{ font-family:var(--font-display); font-size:clamp(1.7rem, 3.6vw, 2.6rem); lin
   drawer.querySelectorAll('a').forEach(function(a){
     a.addEventListener('click', function(){ drawer.classList.remove('is-open'); document.body.style.overflow=''; });
   });
-
-  /* ---- asado parallax (rAF, only while in view, skipped on reduced motion) ---- */
-  var asadoBg = document.getElementById('asadoBg');
-  if(asadoBg && !reduceMotion){
-    var asadoSection = asadoBg.closest('.asado');
-    var inView = false;
-    var ticking = false;
-    function updateParallax(){
-      if(!inView){ ticking = false; return; }
-      var rect = asadoSection.getBoundingClientRect();
-      var offset = (rect.top) * 0.15;
-      asadoBg.style.transform = 'translateY(' + offset + 'px)';
-      requestAnimationFrame(updateParallax);
-    }
-    if('IntersectionObserver' in window){
-      new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          inView = e.isIntersecting;
-          if(inView && !ticking){ ticking = true; requestAnimationFrame(updateParallax); }
-        });
-      }, { threshold:0 }).observe(asadoSection);
-    }
-  }
 
   /* ---- coverflow carousel ---- */
   var cfTrack = document.getElementById('cfTrack');
