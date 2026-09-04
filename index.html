@@ -352,30 +352,45 @@ h2{ font-family:var(--font-display); font-size:clamp(1.7rem, 3.6vw, 2.6rem); lin
 .bubble.out{ align-self:flex-end; background:var(--color-green); color:var(--color-white); border-bottom-right-radius:4px; }
 
 /* ---------- products bento ---------- */
-.products-grid{
-  margin-top:3rem;
-  display:grid; gap:1.1rem;
-  grid-template-columns:1fr;
-}
-@media (min-width:760px){ .products-grid{ grid-template-columns:repeat(4, 1fr); } }
-.product-card{
+.cow-diagram-wrap{
   position:relative;
-  border-radius:var(--radius);
-  overflow:hidden;
-  aspect-ratio:3/4;
+  max-width:760px;
+  margin:3.5rem auto 0;
 }
-.product-card img{ width:100%; height:100%; object-fit:cover; transition:transform .7s var(--ease); }
-.product-card:hover img{ transform:scale(1.08); }
-.product-card::after{
-  content:""; position:absolute; inset:0;
-  background:linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,.82) 100%);
+.cow-diagram{ width:100%; height:auto; display:block; overflow:visible; }
+.cut-region{
+  fill:#17170f;
+  stroke:var(--color-paper);
+  stroke-width:2.5;
+  cursor:pointer;
+  transition:fill .2s var(--ease);
 }
-.product-card .label{
-  position:absolute; left:1rem; right:1rem; bottom:1rem; z-index:2;
+.cut-region:hover, .cut-region.is-active{ fill:var(--color-red); }
+.cut-static{ fill:#17170f; pointer-events:none; }
+.cow-ground{ fill:rgba(23,23,15,.1); }
+.cow-label{
+  position:absolute; left:0; top:0;
+  transform:translate(-50%,-115%);
+  background:var(--color-ink);
   color:var(--color-white);
+  font-family:var(--font-display);
+  font-size:1rem;
+  padding:.55rem 1.15rem;
+  border-radius:999px;
+  white-space:nowrap;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .15s ease;
+  z-index:3;
 }
-.product-card .label strong{ font-family:var(--font-display); font-size:1.15rem; display:block; line-height:1.15; }
-.product-card .label span{ font-size:.78rem; color:#d8d8d2; }
+.cow-label::after{
+  content:""; position:absolute; left:50%; top:100%;
+  transform:translateX(-50%);
+  border:6px solid transparent;
+  border-top-color:var(--color-ink);
+}
+.cow-label.is-visible{ opacity:1; }
+.cow-hint{ margin-top:1.6rem; text-align:center; font-size:.85rem; color:#6b6a63; }
 .products-foot{ margin-top:2rem; text-align:center; }
 .products-foot a{ font-weight:700; color:var(--color-green); border-bottom:2px solid var(--color-green); padding-bottom:2px; }
 
@@ -645,27 +660,67 @@ h2{ font-family:var(--font-display); font-size:clamp(1.7rem, 3.6vw, 2.6rem); lin
 
   <section class="section-pad" id="productos">
     <div class="container">
-      <h2 class="reveal" style="color:var(--color-ink)">Una opción para cada comida y cada presupuesto.</h2>
-      <div class="products-grid">
-        <div class="product-card reveal" style="--i:1">
-          <img src="assets/photos/mano-corte.jpg" alt="Cortes prácticos para el día a día" loading="lazy">
-          <div class="label"><strong>Para todos los días</strong><span>Bifes, milanesas y cortes prácticos</span></div>
-        </div>
-        <div class="product-card reveal" style="--i:2">
-          <img src="assets/photos/corte-costillar.jpg" alt="Cortes rendidores para horno y olla" loading="lazy">
-          <div class="label"><strong>Horno y olla</strong><span>Opciones rendidoras para varios</span></div>
-        </div>
-        <div class="product-card reveal" style="--i:3">
-          <img src="assets/photos/carnicero-trabajando.jpg" alt="Cortes clásicos para la parrilla" loading="lazy">
-          <div class="label"><strong>Para la parrilla</strong><span>Los clásicos y alguna alternativa</span></div>
-        </div>
-        <div class="product-card reveal" style="--i:4">
-          <img src="assets/photos/storefront-wide.jpg" alt="Piezas completas para comprar en cantidad" loading="lazy">
-          <div class="label"><strong>Para comprar en cantidad</strong><span>Piezas completas al mejor precio</span></div>
-        </div>
-      </div>
-      <div class="products-foot reveal" style="--i:5">
-        <a href="https://wa.me/5491146874050?text=Hola!%20No%20s%C3%A9%20qu%C3%A9%20corte%20me%20conviene" target="_blank" rel="noopener">¿No sabés cuál te conviene? Preguntanos.</a>
+      <h2 class="reveal" style="color:var(--color-ink)">Conocé los cortes.</h2>
+      <p class="lede reveal" style="--i:1">Tocá cada parte de la vaca para ver de qué corte se trata.</p>
+      <div class="cow-diagram-wrap reveal-scale" style="--i:2">
+        <svg class="cow-diagram" viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="torsoClip">
+              <path d="M255,180 C258,130 320,108 400,105 C470,102 535,112 558,145 C578,175 578,225 560,260 C540,295 480,315 400,317 C330,318 275,305 258,265 C248,235 250,205 255,180 Z"/>
+            </clipPath>
+            <clipPath id="rumpClip">
+              <path d="M545,150 C560,115 610,100 650,110 C685,120 700,150 698,190 C696,230 690,270 680,310 C672,345 665,380 655,410 C650,425 635,432 615,432 L575,432 C560,432 552,422 555,405 C560,370 555,330 548,295 C540,255 535,215 538,180 C540,168 542,158 545,150 Z"/>
+            </clipPath>
+          </defs>
+
+          <ellipse class="cow-ground" cx="430" cy="452" rx="330" ry="16"/>
+
+          <!-- tail -->
+          <path class="cut-static" d="M655,140 C670,180 675,230 672,280 C670,320 665,355 660,385 C674,388 687,396 691,411 C674,417 654,412 644,398 C639,350 644,300 647,250 C649,210 647,175 644,150 Z"/>
+
+          <!-- horns + ear + head -->
+          <path class="cut-static" d="M75,90 C58,55 68,28 96,34 C92,55 90,76 85,96 Z"/>
+          <path class="cut-static" d="M110,85 C121,48 147,32 162,43 C146,59 129,75 119,96 Z"/>
+          <path class="cut-static" d="M128,108 C149,97 165,108 159,129 C144,129 133,123 128,108 Z"/>
+          <path class="cut-static" d="M40,190 C34,150 55,109 100,99 C141,93 166,119 169,150 C171,181 160,211 140,235 C120,257 89,257 69,241 C50,225 42,211 40,190 Z"/>
+          <circle cx="98" cy="150" r="6" fill="var(--color-paper)"/>
+
+          <!-- neck: Cogote con azotillo -->
+          <path class="cut-region" data-name="Cogote con azotillo" d="M150,140 L255,146 L272,262 L192,300 L150,238 Z"/>
+
+          <!-- front leg: Brazuelo sin hueso -->
+          <path class="cut-region" data-name="Brazuelo sin hueso" d="M193,275 L255,275 L249,408 L262,432 L188,432 L200,408 Z"/>
+
+          <!-- torso: back row -->
+          <g clip-path="url(#torsoClip)">
+            <rect class="cut-region" data-name="Aguja sin tapa" x="252" y="98" width="78" height="98"/>
+            <rect class="cut-region" data-name="Bife ancho" x="330" y="98" width="80" height="98"/>
+            <rect class="cut-region" data-name="Bife angosto" x="410" y="98" width="70" height="98"/>
+            <rect class="cut-region" data-name="Lomo" x="480" y="98" width="100" height="98"/>
+            <!-- torso: mid row -->
+            <rect class="cut-region" data-name="Carnaza de paleta" x="252" y="196" width="78" height="60"/>
+            <rect class="cut-region" data-name="Asado" x="330" y="196" width="100" height="60"/>
+            <rect class="cut-region" data-name="Matambre" x="430" y="196" width="60" height="60"/>
+            <rect class="cut-region" data-name="Entraña" x="490" y="196" width="90" height="60"/>
+            <!-- torso: belly row -->
+            <rect class="cut-region" data-name="Pecho con tapa" x="252" y="256" width="78" height="66"/>
+            <rect class="cut-region" data-name="Falda" x="330" y="256" width="100" height="66"/>
+            <rect class="cut-region" data-name="Vacío" x="430" y="256" width="150" height="66"/>
+          </g>
+
+          <!-- rump + rear leg -->
+          <g clip-path="url(#rumpClip)">
+            <rect class="cut-region" data-name="Corazón de cuadril" x="536" y="108" width="64" height="82"/>
+            <rect class="cut-region" data-name="Colita de cuadril" x="600" y="108" width="100" height="82"/>
+            <rect class="cut-region" data-name="Cuadrada" x="536" y="190" width="54" height="80"/>
+            <rect class="cut-region" data-name="Bola de lomo" x="590" y="190" width="50" height="80"/>
+            <rect class="cut-region" data-name="Peceto" x="640" y="190" width="70" height="80"/>
+            <rect class="cut-region" data-name="Nalga" x="536" y="270" width="74" height="80"/>
+            <rect class="cut-region" data-name="Tortuguita" x="610" y="270" width="100" height="80"/>
+            <rect class="cut-region" data-name="Garrón" x="536" y="350" width="132" height="84"/>
+          </g>
+        </svg>
+        <div class="cow-label" id="cowLabel"></div>
       </div>
     </div>
   </section>
@@ -881,6 +936,49 @@ h2{ font-family:var(--font-display); font-size:clamp(1.7rem, 3.6vw, 2.6rem); lin
     });
 
     window.addEventListener('resize', layoutCoverflow);
+  }
+
+  /* ---- cow cuts diagram ---- */
+  var cowWrap = document.querySelector('.cow-diagram-wrap');
+  if(cowWrap){
+    var cowSvg = cowWrap.querySelector('svg');
+    var cowLabel = document.getElementById('cowLabel');
+    var cutRegions = cowWrap.querySelectorAll('.cut-region');
+    var activeRegion = null;
+
+    function placeCowLabel(path){
+      var bbox = path.getBBox();
+      var pt = cowSvg.createSVGPoint();
+      pt.x = bbox.x + bbox.width / 2;
+      pt.y = bbox.y;
+      var screenPt = pt.matrixTransform(path.getScreenCTM());
+      var wrapRect = cowWrap.getBoundingClientRect();
+      cowLabel.style.left = (screenPt.x - wrapRect.left) + 'px';
+      cowLabel.style.top = (screenPt.y - wrapRect.top) + 'px';
+    }
+    function activateCut(path){
+      cutRegions.forEach(function(r){ r.classList.remove('is-active'); });
+      path.classList.add('is-active');
+      cowLabel.textContent = path.getAttribute('data-name');
+      placeCowLabel(path);
+      cowLabel.classList.add('is-visible');
+      activeRegion = path;
+    }
+    function clearCut(){
+      cutRegions.forEach(function(r){ r.classList.remove('is-active'); });
+      cowLabel.classList.remove('is-visible');
+      activeRegion = null;
+    }
+    cutRegions.forEach(function(path){
+      path.addEventListener('mouseenter', function(){ activateCut(path); });
+      path.addEventListener('mouseleave', function(){ if(activeRegion === path) clearCut(); });
+      path.addEventListener('click', function(e){
+        e.stopPropagation();
+        if(activeRegion === path){ clearCut(); } else { activateCut(path); }
+      });
+    });
+    document.addEventListener('click', clearCut);
+    window.addEventListener('resize', function(){ if(activeRegion) placeCowLabel(activeRegion); });
   }
 })();
 </script>
