@@ -660,7 +660,7 @@ h2{ font-family:var(--font-display); font-size:clamp(1.7rem, 3.6vw, 2.6rem); lin
 
   <section class="section-pad" id="productos">
     <div class="container">
-      <h2 class="reveal" style="color:var(--color-ink)">Conocé los cortes.</h2>
+      <h2 class="reveal" style="color:var(--color-ink)">Una opción para cada comida y cada presupuesto.</h2>
       <p class="lede reveal" style="--i:1">Tocá cada parte de la vaca para ver de qué corte se trata.</p>
       <div class="cow-diagram-wrap reveal-scale" style="--i:2">
         <svg class="cow-diagram" viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg">
@@ -679,45 +679,48 @@ h2{ font-family:var(--font-display); font-size:clamp(1.7rem, 3.6vw, 2.6rem); lin
           <path class="cut-static" d="M655,140 C670,180 675,230 672,280 C670,320 665,355 660,385 C674,388 687,396 691,411 C674,417 654,412 644,398 C639,350 644,300 647,250 C649,210 647,175 644,150 Z"/>
 
           <!-- horns + ear + head -->
-          <path class="cut-static" d="M75,90 C58,55 68,28 96,34 C92,55 90,76 85,96 Z"/>
-          <path class="cut-static" d="M110,85 C121,48 147,32 162,43 C146,59 129,75 119,96 Z"/>
-          <path class="cut-static" d="M128,108 C149,97 165,108 159,129 C144,129 133,123 128,108 Z"/>
-          <path class="cut-static" d="M40,190 C34,150 55,109 100,99 C141,93 166,119 169,150 C171,181 160,211 140,235 C120,257 89,257 69,241 C50,225 42,211 40,190 Z"/>
-          <circle cx="98" cy="150" r="6" fill="var(--color-paper)"/>
+          <path class="cut-static" d="M70,88 C52,60 58,30 88,32 C90,54 90,76 83,98 Z"/>
+          <path class="cut-static" d="M112,80 C120,44 148,26 165,38 C150,56 132,70 121,92 Z"/>
+          <path class="cut-static" d="M132,112 C154,100 170,112 162,133 C147,132 136,126 132,112 Z"/>
+          <path class="cut-static" d="M32,196 C24,155 46,110 96,98 C140,88 168,116 171,148 C174,180 162,213 141,238 C119,262 84,261 62,244 C42,229 36,215 32,196 Z"/>
+          <circle cx="90" cy="152" r="6" fill="var(--color-paper)"/>
 
-          <!-- neck: Cogote con azotillo -->
-          <path class="cut-region" data-name="Cogote con azotillo" d="M150,140 L255,146 L272,262 L192,300 L150,238 Z"/>
+          <!-- neck: Espinazo -->
+          <path class="cut-region" data-name="Espinazo" d="M150,140 L255,146 L272,262 L192,300 L150,238 Z"/>
 
-          <!-- front leg: Brazuelo sin hueso -->
-          <path class="cut-region" data-name="Brazuelo sin hueso" d="M193,275 L255,275 L249,408 L262,432 L188,432 L200,408 Z"/>
+          <!-- front leg: Osobuco -->
+          <path class="cut-region" data-name="Osobuco" d="M193,275 L255,275 L249,408 L262,432 L188,432 L200,408 Z"/>
 
           <!-- torso: back row -->
           <g clip-path="url(#torsoClip)">
-            <rect class="cut-region" data-name="Aguja sin tapa" x="252" y="98" width="78" height="98"/>
-            <rect class="cut-region" data-name="Bife ancho" x="330" y="98" width="80" height="98"/>
-            <rect class="cut-region" data-name="Bife angosto" x="410" y="98" width="70" height="98"/>
-            <rect class="cut-region" data-name="Lomo" x="480" y="98" width="100" height="98"/>
+            <rect class="cut-region" data-name="Paleta" x="252" y="98" width="66" height="98"/>
+            <rect class="cut-region" data-name="Palomita" x="318" y="98" width="54" height="98"/>
+            <rect class="cut-region" data-name="Bife ancho" x="372" y="98" width="70" height="98"/>
+            <rect class="cut-region" data-name="Bife angosto" x="442" y="98" width="66" height="98"/>
+            <rect class="cut-region" data-name="Lomo" x="508" y="98" width="72" height="98"/>
             <!-- torso: mid row -->
-            <rect class="cut-region" data-name="Carnaza de paleta" x="252" y="196" width="78" height="60"/>
+            <rect class="cut-region" data-name="Bife americano" x="252" y="196" width="78" height="60"/>
             <rect class="cut-region" data-name="Asado" x="330" y="196" width="100" height="60"/>
             <rect class="cut-region" data-name="Matambre" x="430" y="196" width="60" height="60"/>
             <rect class="cut-region" data-name="Entraña" x="490" y="196" width="90" height="60"/>
             <!-- torso: belly row -->
-            <rect class="cut-region" data-name="Pecho con tapa" x="252" y="256" width="78" height="66"/>
+            <rect class="cut-region" data-name="Tapa de asado" x="252" y="256" width="78" height="66"/>
             <rect class="cut-region" data-name="Falda" x="330" y="256" width="100" height="66"/>
             <rect class="cut-region" data-name="Vacío" x="430" y="256" width="150" height="66"/>
           </g>
 
           <!-- rump + rear leg -->
           <g clip-path="url(#rumpClip)">
-            <rect class="cut-region" data-name="Corazón de cuadril" x="536" y="108" width="64" height="82"/>
-            <rect class="cut-region" data-name="Colita de cuadril" x="600" y="108" width="100" height="82"/>
-            <rect class="cut-region" data-name="Cuadrada" x="536" y="190" width="54" height="80"/>
-            <rect class="cut-region" data-name="Bola de lomo" x="590" y="190" width="50" height="80"/>
-            <rect class="cut-region" data-name="Peceto" x="640" y="190" width="70" height="80"/>
-            <rect class="cut-region" data-name="Nalga" x="536" y="270" width="74" height="80"/>
-            <rect class="cut-region" data-name="Tortuguita" x="610" y="270" width="100" height="80"/>
-            <rect class="cut-region" data-name="Garrón" x="536" y="350" width="132" height="84"/>
+            <rect class="cut-region" data-name="Cuadril" x="536" y="108" width="64" height="82"/>
+            <rect class="cut-region" data-name="Colita de cuadril" x="600" y="108" width="110" height="82"/>
+            <rect class="cut-region" data-name="Tapa de nalga" x="536" y="190" width="54" height="80"/>
+            <rect class="cut-region" data-name="Nalga" x="590" y="190" width="54" height="80"/>
+            <rect class="cut-region" data-name="Bola de lomo" x="644" y="190" width="70" height="80"/>
+            <rect class="cut-region" data-name="Peceto" x="536" y="270" width="58" height="80"/>
+            <rect class="cut-region" data-name="Cuadrada" x="594" y="270" width="58" height="80"/>
+            <rect class="cut-region" data-name="Tortuguita" x="652" y="270" width="62" height="80"/>
+            <rect class="cut-region" data-name="Roast beef" x="536" y="350" width="88" height="82"/>
+            <rect class="cut-region" data-name="Carcaza común" x="624" y="350" width="90" height="82"/>
           </g>
         </svg>
         <div class="cow-label" id="cowLabel"></div>
