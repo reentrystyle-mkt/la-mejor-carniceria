@@ -378,7 +378,7 @@ h2{ font-family:var(--font-display); font-size:clamp(1.7rem, 3.6vw, 2.6rem); lin
   max-width:520px;
   margin-left:auto; margin-right:auto;
 }
-@media (min-width:560px){ .cow-legend{ grid-template-columns:1fr 1fr; } }
+@media (min-width:560px){ .cow-legend{ grid-template-columns:1fr 1fr; grid-auto-flow:column; grid-template-rows:repeat(7, auto); } }
 .cow-legend-item{
   display:flex; align-items:baseline; gap:.5rem;
   font-size:.95rem;
@@ -678,18 +678,18 @@ h2{ font-family:var(--font-display); font-size:clamp(1.7rem, 3.6vw, 2.6rem); lin
       </div>
       <div class="cow-legend">
         <div class="cow-legend-item" data-cut="1"><span class="num">1.</span> Peceto</div>
-        <div class="cow-legend-item" data-cut="8"><span class="num">8.</span> Cuadril</div>
         <div class="cow-legend-item" data-cut="2"><span class="num">2.</span> Cuadrada</div>
-        <div class="cow-legend-item" data-cut="9"><span class="num">9.</span> Colita de cuadril</div>
         <div class="cow-legend-item" data-cut="3"><span class="num">3.</span> Tortuguita</div>
-        <div class="cow-legend-item" data-cut="10"><span class="num">10.</span> Lomo</div>
         <div class="cow-legend-item" data-cut="4"><span class="num">4.</span> Osobuco</div>
-        <div class="cow-legend-item" data-cut="11"><span class="num">11.</span> Bife angosto</div>
         <div class="cow-legend-item" data-cut="5"><span class="num">5.</span> Tapa de nalga</div>
-        <div class="cow-legend-item" data-cut="12"><span class="num">12.</span> Vacío</div>
         <div class="cow-legend-item" data-cut="6"><span class="num">6.</span> Nalga</div>
-        <div class="cow-legend-item" data-cut="13"><span class="num">13.</span> Bife ancho</div>
         <div class="cow-legend-item" data-cut="7"><span class="num">7.</span> Bola de lomo</div>
+        <div class="cow-legend-item" data-cut="8"><span class="num">8.</span> Cuadril</div>
+        <div class="cow-legend-item" data-cut="9"><span class="num">9.</span> Colita de cuadril</div>
+        <div class="cow-legend-item" data-cut="10"><span class="num">10.</span> Lomo</div>
+        <div class="cow-legend-item" data-cut="11"><span class="num">11.</span> Bife angosto</div>
+        <div class="cow-legend-item" data-cut="12"><span class="num">12.</span> Vacío</div>
+        <div class="cow-legend-item" data-cut="13"><span class="num">13.</span> Bife ancho</div>
         <div class="cow-legend-item" data-cut="14"><span class="num">14.</span> Asado</div>
       </div>
     </div>
